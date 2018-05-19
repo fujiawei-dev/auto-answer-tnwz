@@ -31,14 +31,15 @@ class FileEventHandler(FileSystemEventHandler):
             x, y = confirm_question(question, options)
             driver.click(x, y)
         elif event.src_path.split('\\')[-1] == 'choose':
-            sleep(3)
+            sleep(1)
             question, answer = choose_parsing(question, options)
+            print('问题:', question)
+            print('答案:', answer)
             insert_db(question, answer)
         elif event.src_path.split('\\')[-1] == 'fightResult':
             print('游戏结束\n')
-            sleep(1)
             driver.back()
-            sleep(1)
+            sleep(0.5)
             option = POSITION[-1]
             driver.swipe_up()
             driver.click(option['x'], option['y'])
@@ -50,6 +51,8 @@ if __name__ == "__main__":
     handler = FileEventHandler()
     observer.schedule(handler, DIRECTORY, True)
     print('游戏开始')
+    option = POSITION[-1]
+    driver.click(option['x'], option['y'])
     observer.start()
     try:
         while True:
