@@ -6,7 +6,7 @@ from cerium import AndroidDriver
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 
-from constants import DIRECTORY, POSITION
+from constants import DIR_CHOOSE, DIRECTORY, POSITION
 from quizzes import insert_db
 from utils import choose_parsing, confirm_question, question_parsing
 
@@ -26,10 +26,12 @@ class FileEventHandler(FileSystemEventHandler):
     def on_created(self, event):
         global question, options
         if event.src_path.split('\\')[-1] == 'findQuiz':
-            sleep(3)
+            sleep(0.5)
             question, options = question_parsing()
             x, y = confirm_question(question, options)
-            driver.click(x, y)
+            while not os.path.exists(DIR_CHOOSE):
+                driver.click(x, y)
+                sleep(0.5)
         elif event.src_path.split('\\')[-1] == 'choose':
             sleep(1)
             question, answer = choose_parsing(question, options)
