@@ -1,19 +1,23 @@
 import json
 import os
 import os.path
+import re
 from time import sleep
 
 import grequests
 
-from constants import (DIR_CHOOSE, DIR_FINDQUIZ, HEADERS, NEGATIVE_WORDS,
-                       POSITION)
+from constants import (CLEAN_WORDS, DIR_CHOOSE, DIR_FINDQUIZ, HEADERS,
+                       NEGATIVE_WORDS, POSITION)
 from quizzes import match_question
+
+
+usual = re.compile('[\u4e00-\u9fa5a-zA-Z0-9]+')
 
 
 def choose_parsing(question, options):
     resp = json.load(open(DIR_CHOOSE, encoding='utf-8'))
     os.remove(DIR_CHOOSE)
-    question = question.strip('?').replace("'", "\'").strip().replace('"', '\"')
+    question = question.strip('?').replace("'", "\'").strip()
     option = int(resp['data']['answer']) - 1
     answer = options[option]
     return question, answer
@@ -43,13 +47,23 @@ def search_question(question, options):
     return option
 
 
+def clean_question(question):
+    question = ''.join(usual.findall(question))
+    for i in CLEAN_WORDS:
+        question = question.replace(i, ' ')
+    question = ' '.join(question.split())
+    return question
+
+
 def confirm_question(question, options):
     res = match_question(question)
     if res:
         while not os.path.exists(DIR_CHOOSE):
             option = options.index(res)
             sleep(0.5)
+        print('数据库匹配成功')
     else:
-        option = search_question(question, options)
+        print('正在百度搜索中')
+        option = search_question(clean_question(question), options)
     position = POSITION[option]
     return position['x'], position['y']
