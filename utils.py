@@ -1,8 +1,6 @@
 import json
 import os
-import os.path
 import re
-from time import sleep
 
 import grequests
 
@@ -58,10 +56,12 @@ def clean_question(question):
 def confirm_question(question, options):
     res = match_question(question)
     if res:
-        while not os.path.exists(DIR_CHOOSE):
+        try:
             option = options.index(res)
-            sleep(0.5)
-        print('数据库匹配成功')
+            print('数据库匹配成功')
+        except ValueError:
+            print('正在百度搜索中')
+            option = search_question(clean_question(question), options)
     else:
         print('正在百度搜索中')
         option = search_question(clean_question(question), options)
