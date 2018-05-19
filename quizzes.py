@@ -15,9 +15,6 @@ def insert_db(question, answer):
     except sqlite3.OperationalError:
         print(sql, file=open('sql.log', 'a'))
 
-    print('问题:', question)
-    print('答案:', answer)
-
 
 def match_question(question):
     question = question.strip('?').replace( "'", "\'").strip().replace('"', '\"')
@@ -26,7 +23,12 @@ def match_question(question):
     try:
         cursor = conn.execute(sql).fetchone()
         if cursor:
-            correct_answer = cursor[0]
+            answer = cursor[0]
     except sqlite3.OperationalError:
         print(sql, file=open('sql.log', 'a'))
     return answer
+
+
+if __name__ == '__main__':
+    question = '希腊神话中宙斯和阿波罗的关系是？'
+    print(match_question(question))
