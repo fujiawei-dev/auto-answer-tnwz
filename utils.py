@@ -30,7 +30,7 @@ def question_parsing():
 
 
 def search_question(question, options):
-    urls = ('http://www.baidu.com/s?wd={}&pn={}&rn=50'.format(question, i) for i in range(0, 201, 50))
+    urls = ('http://www.baidu.com/s?wd={}&pn={}&rn=50'.format(clean_question(question), i) for i in range(0, 201, 50))
     rs = (grequests.get(url, headers=HEADERS) for url in urls)
     responses = grequests.map(rs)
     counts = [0, 0, 0, 0]
@@ -64,6 +64,6 @@ def confirm_question(question, options):
             option = search_question(clean_question(question), options)
     else:
         print('正在百度搜索中')
-        option = search_question(clean_question(question), options)
+        option = search_question(question, options)
     position = POSITION[option]
     return position['x'], position['y']
