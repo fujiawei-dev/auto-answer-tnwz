@@ -36,7 +36,7 @@ def search_question(question, options):
     counts = [0, 0, 0, 0]
     for response in responses:
         for i in range(4):
-            counts[i] += response.text.lower().count(options[i])
+            counts[i] += response.text.count(options[i])
     option = counts.index(max(counts))
     for neg in NEGATIVE_WORDS:
         if neg in question:
