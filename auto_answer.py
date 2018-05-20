@@ -35,6 +35,11 @@ class FileEventHandler(FileSystemEventHandler):
                     sleep(0.5)
             except KeyError:
                 driver.back()
+                sleep(0.2)
+                option = POSITION[-1]
+                driver.swipe_up()
+                driver.click(option['x'], option['y'])
+                print('游戏开始')
         elif event.src_path.split('\\')[-1] == 'choose':
             sleep(1)
             question, answer = choose_parsing(question, options)
