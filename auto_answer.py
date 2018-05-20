@@ -27,11 +27,14 @@ class FileEventHandler(FileSystemEventHandler):
         global question, options
         if event.src_path.split('\\')[-1] == 'findQuiz':
             sleep(0.5)
-            question, options = question_parsing()
-            x, y = confirm_question(question, options)
-            while not os.path.exists(DIR_CHOOSE):
-                driver.click(x, y)
-                sleep(0.5)
+            try:
+                question, options = question_parsing()
+                x, y = confirm_question(question, options)
+                while not os.path.exists(DIR_CHOOSE):
+                    driver.click(x, y)
+                    sleep(0.5)
+            except KeyError:
+                driver.back()
         elif event.src_path.split('\\')[-1] == 'choose':
             sleep(1)
             question, answer = choose_parsing(question, options)
