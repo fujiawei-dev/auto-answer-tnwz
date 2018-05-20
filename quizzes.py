@@ -13,7 +13,7 @@ def insert_db(question, answer):
     except sqlite3.IntegrityError:
         pass
     except sqlite3.OperationalError:
-        print(sql, file=open('sql.log', 'a'))
+        print(sql, file=open('sql.log', 'a', encoding='utf-8'))
 
 
 def match_question(question):
@@ -25,7 +25,7 @@ def match_question(question):
         if cursor:
             answer = cursor[0]
     except sqlite3.OperationalError:
-        print(sql, file=open('sql.log', 'a'))
+        print(sql, file=open('sql.log', 'a', encoding='utf-8'))
     return answer
 
 
