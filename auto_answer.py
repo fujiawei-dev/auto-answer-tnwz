@@ -41,7 +41,7 @@ class FileEventHandler(FileSystemEventHandler):
         elif event.src_path.split('\\')[-1] == 'fightResult':
             print('游戏结束\n')
             driver.back()
-            sleep(0.5)
+            sleep(0.2)
             option = POSITION[-1]
             driver.swipe_up()
             driver.click(option['x'], option['y'])
