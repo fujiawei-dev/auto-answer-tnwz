@@ -9,7 +9,7 @@ from constants import (CLEAN_WORDS, DIR_CHOOSE, DIR_FINDQUIZ, HEADERS,
 from quizzes import match_question
 
 
-usual = re.compile('[\u4e00-\u9fa5a-zA-Z0-9]+')
+usual = re.compile('[\u4e00-\u9fa5a-zA-Z0-9\+-=\']+')
 
 
 def choose_parsing(question, options):
@@ -67,3 +67,8 @@ def confirm_question(question, options):
         option = search_question(question, options)
     position = POSITION[option]
     return position['x'], position['y']
+
+
+if __name__ == '__main__':
+    question = '1+1.3\'s=?'
+    print(clean_question(question))
