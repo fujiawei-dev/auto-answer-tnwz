@@ -6,7 +6,7 @@ from constants import QUIZZES
 conn = sqlite3.connect(QUIZZES, check_same_thread=False)
 
 def insert_db(question, answer):
-    sql = "insert into quizzes(question, answer) values('%s', '%s')" % (question, answer)
+    sql = 'insert into quizzes(question, answer) values("%s", "%s")' % (question, answer)
     try:
         conn.execute(sql)
         conn.commit()
@@ -17,7 +17,6 @@ def insert_db(question, answer):
 
 
 def match_question(question):
-    question = question.strip('?').replace( "'", "\'").strip().replace('"', '\"')
     sql = 'select answer from quizzes where question="{}"'.format(question)
     answer = None
     try:
@@ -30,5 +29,7 @@ def match_question(question):
 
 
 if __name__ == '__main__':
-    question = '希腊神话中宙斯和阿波罗的关系是？'
+    question = "不属于莎士比亚的作品是？"
+    answer = "'A Doll's House'"
+    insert_db(question, answer)
     print(match_question(question))
