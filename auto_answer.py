@@ -32,7 +32,7 @@ class FileEventHandler(FileSystemEventHandler):
                 x, y = confirm_question(question, options)
                 while not os.path.exists(DIR_CHOOSE):
                     driver.click(x, y)
-                    sleep(0.5)
+                    sleep(0.2)
             except KeyError:
                 driver.back()
                 sleep(0.2)
