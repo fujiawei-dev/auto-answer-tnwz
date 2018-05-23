@@ -1,1 +1,3 @@
 cerium>=1.2.0
+watchdog>=0.8.3
+grequests>=0.3.0
