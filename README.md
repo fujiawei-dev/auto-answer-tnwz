@@ -24,7 +24,5 @@ pip install -U cerium
 ![正式](https://raw.githubusercontent.com/fjwCode/auto-answer-tnwz/master/002.png)
 
 
-# 关于作者
-
-## 微信公众号
+## 关于作者——微信公众号
 ![微信公众号](https://raw.githubusercontent.com/fjwCode/auto-answer-hznu/master/wx.jpg)
