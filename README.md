@@ -2,7 +2,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Platform](https://img.shields.io/badge/Platform-Windows-4BC51D.svg)](https://pypi.org/project/auto-answer-tnwz/)
 
-> ***Cerium*** 是一个我写的 Android 自动化测试框架，之前曾稍微介绍了一下，但其具体应用估计目前只有我十分了解，所以在这分享一个小案例，抛砖引玉。
+> [***Cerium***](https://github.com/fjwCode/cerium) 是一个我写的 Android 自动化测试框架，之前曾稍微介绍了一下，但其具体应用估计目前只有我十分了解，所以在这分享一个小案例，抛砖引玉。
 
 **仅作为自动化测试技术交流，请勿他用！**
 
